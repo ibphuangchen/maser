@@ -467,50 +467,8 @@ display <- function(events, type = c("A3SS", "A5SS", "SE", "RI", "MXE")){
   events <- as(events, "list")
   
   data <- create_stats(as(events, "Maser"), type)
-  DT::datatable(data, options = list(
-                        pageLength = 10,
-                        filter = "none",
-                        searchHighlight = TRUE,
-                        rownames = FALSE,
-                        style = "bootstrap"
-                        ),
-                escape = FALSE,
-                rownames = FALSE,
-                selection = "none",
-                filter = 'top'
-                )
-  
-}
-
-
-#' export splicing events annotation to a data frame
-#' 
-#' @param events a maser object.
-#' @param type character indicating splice type. Possible values are
-#'    \code{c("A3SS", "A5SS", "SE", "RI", "MXE")}
-#' @return a datatables object.
-#' @examples
-#' path <- system.file("extdata", file.path("MATS_output"), package = "maser")
-#' hypoxia <- maser(path, c("Hypoxia 0h", "Hypoxia 24h"))
-#' hypoxia_filt <- filterByCoverage(hypoxia, avg_reads = 5)
-#' hypoxia_top <- topEvents(hypoxia_filt)
-#' exportAS(hypoxia_top, type = "SE")
-#' @export
-#' @importFrom DT datatable
-#' @import methods
-exportAS <- function(events, type = c("A3SS", "A5SS", "SE", "RI", "MXE")){
-  
-  if(!is(events, "Maser")){
-    stop("Parameter events has to be a maser object.")
-  }
-  
-  type <- match.arg(type)
-  events <- as(events, "list")
-  
-  data <- create_stats(as(events, "Maser"), type)
   as.data.frame(data)
   
 }
 
 
-  
